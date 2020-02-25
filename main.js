@@ -9,17 +9,19 @@ socket.on('List_Online', arrUserInfo => {
         arrUserInfo.forEach(user => {
                 const { ten, peerId } = user;
                 $('#ulUser').append(`<button type="button" class="buttonUser" id="${peerId}">${ten}</button>`);
+                
+                var my_peer = $('#my-peer').val();
+                $(`#${my_peer}`).css("background-color", "#ff8490");
+                $(`#${my_peer}`).prop('disabled', true);
         });
         socket.on('have_a_register', user => {
                 const { ten, peerId } = user;
                 $('#ulUser').append(`<button type="button" class="buttonUser" id="${peerId}">${ten}</button>`);
-                
         });
         socket.on('user_disconnect', peerId => {
                 $(`#${peerId}`).remove();
         });
 });
-
 socket.on('register_fail', () => alert('Please choose another username!'));
 
 function openStream() {
@@ -38,11 +40,12 @@ function playStream(idVideoTag, stream) {
 const peer = new Peer({ key: 'peerjs', host: 'mypeer33.herokuapp.com', secure: true, port: 443 });
 
 peer.on('open', id => {
-        //$('#my-peer').append(id)
+        $('#my-peer').val(id);
         $('#btnSignUp').click(() => {
                 const username = $('#txtUsername').val();
                 socket.emit('User_Register', { ten: username, peerId: id });
         });
+
 });
 
 //Local
@@ -71,9 +74,11 @@ $('#ulUser').on('click', 'button', function () {
         let remote = "remoteStream" + count_video;
                 openStream()
                         .then(stream => {
+                                playStream('localStream', stream);
                                 peer.call(id, stream).on('stream', remoteStream => playStream(remote, remoteStream));
                         });
-
+                        $(`#${id}`).prop('disabled', true);
+                        $(`#${id}`).css("background-color", "#acacac");
         /*if (offer == 1) {
                 openStream()
                         .then(stream => {
@@ -119,7 +124,7 @@ peer.on('call', call => {
         $('#remove').remove();
         $('#remoteStream1').remove();
         $('#br').remove();
-        $('#divChat').append(`<div class="col-lg-6" id="remove"><video id="remoteStream1" class="w-100" controls></video><br id="br"></div>`);
+        $('#divChat').append(`<div class="col-lg-12" id="remove"><video id="remoteStream1" class="w-100" controls></video><br id="br"></div>`);
         if (answer == 1) {
                 openStream()
                         .then(stream => {
