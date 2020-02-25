@@ -71,6 +71,8 @@ $('#ulUser').on('click', 'button', function () {
         //arrStream.push('stream'+count_video);
         //arrRemoteStream.push('remoteStream'+count_video);
 
+        console.log(id);
+
         let remote = "remoteStream" + count_video;
                 openStream()
                         .then(stream => {
@@ -126,6 +128,8 @@ peer.on('call', call => {
         $('#br').remove();
         $('#divChat').append(`<div class="col-lg-12" id="remove"><video id="remoteStream1" class="w-100" controls></video><br id="br"></div>`);
         if (answer == 1) {
+                $('.buttonUser').prop('disabled', true);
+                $('.buttonUser').css("background-color", "#acacac");
                 openStream()
                         .then(stream => {
                                 playStream('localStream', stream);
@@ -133,6 +137,9 @@ peer.on('call', call => {
                                 call.on('stream', remoteStream => playStream('remoteStream1', remoteStream));
                         });
         } else {
+                
+                $('.buttonUser').prop('disabled', true);
+                $('.buttonUser').css("background-color", "#acacac");
                 openStream()
                         .then(stream => {
                                 playStream('localStream', stream);
