@@ -61,6 +61,12 @@
                         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
                         background-color: #555;
                 }
+                .localVideo{
+                        position: sticky;
+                        top: 0;
+                        overflow: hidden;
+                        z-index: 999;
+                }
         </style>
 </head>
 
@@ -84,14 +90,6 @@
                                 <input id="my-peer" disabled hidden>
                                 <div class="row scrollbar" id="divUserScreen" style="height: 70vh;"></div>
                         </div>
-                        <!-- <div class="col-lg-3">
-                                <video id="remoteStream1" class="w-100" controls></video>
-                                <br>
-                        </div>
-                        <div class="col-lg-3">
-                                <video id="remoteStream2" class="w-100" controls></video>
-                                <br>
-                        </div> -->
                         <div class="d-none">
                                 <input type="text" id="remoteId" placeholder="remote id">
                                 <button id="btnCall">Call</button>
