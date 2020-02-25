@@ -17,6 +17,8 @@ socket.on('List_Online', arrUserInfo => {
         socket.on('user_disconnect', peerId => {
                 $(`#${peerId}`).remove();
                 $(`.video${peerId}`).remove();
+                $(`.div${peerId}`).remove();
+                $(`.br${peerId}`).remove();
         });
 });
 socket.on('register_fail', () => alert('Please choose another username!'));
@@ -56,7 +58,7 @@ var offer = 1;
 var count_video = 1;
 $('#ulUser').on('click', 'button', function () {
         const id = $(this).attr('id');
-        $('#divUserScreen').append(`<div class="col-lg-4 video${id}"><video id="remoteStream${count_video}" class="w-100 video${id}" controls></video><br class="video${id}"></div>`);
+        $('#divUserScreen').append(`<div class="col-lg-4 div${id}"><video id="remoteStream${count_video}" class="w-100 video${id}" controls></video><br class="br${id}"></div>`);
         
 
         console.log(id);
