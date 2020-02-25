@@ -8,11 +8,11 @@ socket.on('List_Online', arrUserInfo => {
         $('#divRegister').hide();
         arrUserInfo.forEach(user => {
                 const { ten, peerId } = user;
-                $('#ulUser').append(`<button type="button" id="${peerId}">${ten}</button>`);
+                $('#ulUser').append(`<button type="button" class="buttonUser" id="${peerId}">${ten}</button>`);
         });
         socket.on('have_a_register', user => {
                 const { ten, peerId } = user;
-                $('#ulUser').append(`<button type="button" id="${peerId}">${ten}</button>`);
+                $('#ulUser').append(`<button type="button" class="buttonUser" id="${peerId}">${ten}</button>`);
         });
         socket.on('user_disconnect', peerId => {
                 $(`#${peerId}`).remove();
@@ -68,34 +68,35 @@ $('#ulUser').on('click', 'button', function () {
         } else {
                 openStream()
                         .then(stream => {
-                                const call = peer.call(id, stream);
                                 const call1 = peer.call(id1, stream);
-                                call1.on('stream', remoteStream1 => playStream('remoteStream1', remoteStream1));
+                                call1.on('stream1', remoteStream1 => playStream('remoteStream1', remoteStream1));
+                                const call = peer.call(id, stream);
                                 call.on('stream', remoteStream => playStream('remoteStream2', remoteStream));
                         });
         }
         offer = 2;
         const id1 = id;
 });
+
 var answer = 1;
 //Remote
 peer.on('call', call => {
-        if(answer == 1){
+        if (answer == 1) {
                 openStream()
-                .then(stream => {
-                        playStream('localStream', stream);
-                        call.answer(stream);
-                        call.on('stream', remoteStream => playStream('remoteStream1', remoteStream));
-                });
+                        .then(stream => {
+                                playStream('localStream', stream);
+                                call.answer(stream);
+                                call.on('stream', remoteStream => playStream('remoteStream1', remoteStream));
+                        });
         } else {
                 openStream()
-                .then(stream => {
-                        playStream('localStream', stream);
-                        call.answer(stream);
-                        call1.answer(stream);
-                        call1.on('stream', remoteStream1 => playStream('remoteStream1', remoteStream1));
-                        call.on('stream', remoteStream => playStream('remoteStream2' , remoteStream));
-                });
+                        .then(stream => {
+                                playStream('localStream', stream);
+                                call.answer(stream);
+                                call1.answer(stream);
+                                call1.on('stream', remoteStream1 => playStream('remoteStream1', remoteStream1));
+                                call.on('stream', remoteStream => playStream('remoteStream2', remoteStream));
+                        });
         }
         answer = 2;
 });
