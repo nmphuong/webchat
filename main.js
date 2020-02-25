@@ -5,14 +5,14 @@ socket.on('List_Online', arrUserInfo => {
         $('#divRegister').hide();
         arrUserInfo.forEach(user => {
                 const { ten, peerId } = user;
-                $('#ulUser').append(`<button type="button" class="buttonUser" id="${peerId}">${ten}</button>`);
+                $('#divUlUser').append(`<button type="button" class="buttonUser" id="${peerId}">${ten}</button>`);
                 var my_peer = $('#my-peer').val();
                 $(`#${my_peer}`).css("background-color", "#ff8490");
                 $(`#${my_peer}`).prop('disabled', true);
         });
         socket.on('have_a_register', user => {
                 const { ten, peerId } = user;
-                $('#ulUser').append(`<button type="button" class="buttonUser" id="${peerId}">${ten}</button>`);
+                $('#divUlUser').append(`<button type="button" class="buttonUser" id="${peerId}">${ten}</button>`);
         });
         socket.on('user_disconnect', peerId => {
                 $(`#${peerId}`).remove();
