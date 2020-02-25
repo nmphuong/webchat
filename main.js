@@ -77,7 +77,7 @@ $('#ulUser').on('click', 'button', function () {
         offer = 2;
         const id1 = id;
 });
-//var answer = 1;
+var answer = 1;
 //Remote
 peer.on('call', call => {
         if(answer == 1){
