@@ -58,28 +58,29 @@ $('#btnCall').click(() => {
 
 var offer = 1;
 var count_video = 1;
+// var arrId = [];
+// var arrStream = [];
+// var arrRemoteStream = [];
 $('#ulUser').on('click', 'button', function () {
         $('#divChat').append(`<div class="col-lg-3"><video id="remoteStream${count_video}" class="w-100" controls></video><br></div>`);
         const id = $(this).attr('id');
+        //arrId.push(id);
+        //arrStream.push('stream'+count_video);
+        //arrRemoteStream.push('remoteStream'+count_video);
         if (offer == 1) {
                 openStream()
                         .then(stream => {
                                 playStream('localStream', stream);
-                                const call = peer.call(id, stream);
+                                let call = peer.call(id, stream);
                                 call.on('stream', remoteStream => playStream('remoteStream1', remoteStream));
                         });
         } else {
                 openStream()
                         .then(stream => {
-                                const call1 = peer.call(id1, stream);
-                                call1.on('stream1', remoteStream1 => playStream('remoteStream1', remoteStream1));
-                                const call = peer.call(id, stream);
-                                call.on('stream', remoteStream => playStream('remoteStream2', remoteStream));
+                                peer.call(id, stream).on('stream', remoteStream => playStream(`remoteStream2`, remoteStream));
                         });
         }
         offer = 2;
-        const id1 = id;
-        //$(`#${id}`).remove();
         count_video += 1;
 });
 
@@ -110,7 +111,7 @@ peer.on('call', call => {
         $('#remove').remove();
         $('#remoteStream1').remove();
         $('#br').remove();
-        $('#divChat').append(`<div class="col-lg-3" id="remove"><video id="remoteStream1" class="w-100" controls></video><br id="br"></div>`);
+        $('#divChat').append(`<div class="col-lg-6" id="remove"><video id="remoteStream1" class="w-100" controls></video><br id="br"></div>`);
         if (answer == 1) {
                 openStream()
                         .then(stream => {
@@ -123,8 +124,8 @@ peer.on('call', call => {
                         .then(stream => {
                                 playStream('localStream', stream);
                                 call.answer(stream);
-                                //call1.answer(stream);
-                                //call1.on('stream', remoteStream1 => playStream('remoteStream1', remoteStream1));
+                                call1.answer(stream);
+                                call1.on('stream', remoteStream1 => playStream('remoteStream1', remoteStream1));
                                 call.on('stream', remoteStream => playStream('remoteStream1', remoteStream));
                         });
         }
