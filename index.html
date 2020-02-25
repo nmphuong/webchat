@@ -4,7 +4,7 @@
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>WebRTC</title>
+        <title>Live Stream</title>
         <link rel="stylesheet" href="bootstrap.min.css">
         <script src="jquery.js"></script>
         <script src="peer.js"></script>
@@ -28,7 +28,8 @@
                         left: 50%;
                         transform: translate(-50%, -50%);
                 }
-                video{
+
+                video {
                         height: 207.66px;
                 }
         </style>
@@ -39,17 +40,21 @@
         <div class="container-fluid">
 
                 <div id="divChat" class="row m-0 p-0">
-                        <div class="col-lg-12">
-                                <p class="h4">List Online:</p>
-                                <ul id="ulUser">
-                                </ul>
-                                <input id="my-peer" disabled hidden>
-                        </div>
-                        <div class="col-lg-12">
-                                <video id="localStream" class="w-100" controls></video>
+                        <div class="col-lg-6 text-center">
+                                <p class="h1">Group: <span class="name-group">CORE</span></p>
+                                <video id="localStream" class="w-100" style="height: 80vh;" controls></video>
                                 <br>
                         </div>
                         <br>
+                        <div class="col-lg-6">
+                                        <ul id="ulUser">
+                                                <span class="h4 text-center">Danh sach online</span>
+                                                <br>
+                                        </ul>
+                                        <input id="my-peer" disabled hidden>
+                                <div class="row" id="divUserScreen">
+                                </div>
+                        </div>
                         <!-- <div class="col-lg-3">
                                 <video id="remoteStream1" class="w-100" controls></video>
                                 <br>
