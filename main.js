@@ -13,6 +13,7 @@ socket.on('List_Online', arrUserInfo => {
         socket.on('have_a_register', user => {
                 const { ten, peerId } = user;
                 $('#ulUser').append(`<button type="button" class="buttonUser" id="${peerId}">${ten}</button>`);
+                
         });
         socket.on('user_disconnect', peerId => {
                 $(`#${peerId}`).remove();
@@ -56,7 +57,9 @@ $('#btnCall').click(() => {
 });
 
 var offer = 1;
+var count_video = 1;
 $('#ulUser').on('click', 'button', function () {
+        $('#divChat').append(`<div class="col-lg-3"><video id="remoteStream${count_video}" class="w-100" controls></video><br></div>`);
         const id = $(this).attr('id');
         if (offer == 1) {
                 openStream()
@@ -76,11 +79,38 @@ $('#ulUser').on('click', 'button', function () {
         }
         offer = 2;
         const id1 = id;
+        //$(`#${id}`).remove();
+        count_video += 1;
 });
 
 var answer = 1;
 //Remote
+// peer.on('call', call => {
+//         $('#divChat').append(`<div class="col-lg-3"><video id="remoteStream1" class="w-100" controls></video><br></div>`);
+//         if (answer == 1) {
+//                 openStream()
+//                         .then(stream => {
+//                                 playStream('localStream', stream);
+//                                 call.answer(stream);
+//                                 call.on('stream', remoteStream => playStream('remoteStream1', remoteStream));
+//                         });
+//         } else {
+//                 openStream()
+//                         .then(stream => {
+//                                 playStream('localStream', stream);
+//                                 call.answer(stream);
+//                                 call1.answer(stream);
+//                                 call1.on('stream', remoteStream1 => playStream('remoteStream1', remoteStream1));
+//                                 call.on('stream', remoteStream => playStream('remoteStream2', remoteStream));
+//                         });
+//         }
+//         answer = 2;
+// });
 peer.on('call', call => {
+        $('#remove').remove();
+        $('#remoteStream1').remove();
+        $('#br').remove();
+        $('#divChat').append(`<div class="col-lg-3" id="remove"><video id="remoteStream1" class="w-100" controls></video><br id="br"></div>`);
         if (answer == 1) {
                 openStream()
                         .then(stream => {
@@ -93,9 +123,9 @@ peer.on('call', call => {
                         .then(stream => {
                                 playStream('localStream', stream);
                                 call.answer(stream);
-                                call1.answer(stream);
-                                call1.on('stream', remoteStream1 => playStream('remoteStream1', remoteStream1));
-                                call.on('stream', remoteStream => playStream('remoteStream2', remoteStream));
+                                //call1.answer(stream);
+                                //call1.on('stream', remoteStream1 => playStream('remoteStream1', remoteStream1));
+                                call.on('stream', remoteStream => playStream('remoteStream1', remoteStream));
                         });
         }
         answer = 2;
