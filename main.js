@@ -75,9 +75,10 @@ $('#ulUser').on('click', 'button', function () {
                                 call.on('stream', remoteStream => playStream('remoteStream1', remoteStream));
                         });
         } else {
+                let remote = "remoteStream"+count_video;
                 openStream()
                         .then(stream => {
-                                peer.call(id, stream).on('stream', remoteStream => playStream(`remoteStream2`, remoteStream));
+                                peer.call(id, stream).on('stream', remoteStream => playStream(remote, remoteStream));
                         });
         }
         offer = 2;
