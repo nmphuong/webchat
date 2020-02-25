@@ -56,7 +56,7 @@ var offer = 1;
 var count_video = 1;
 $('#ulUser').on('click', 'button', function () {
         const id = $(this).attr('id');
-        $('#divUserScreen').append(`<div class="col-lg-4"><video id="remoteStream${count_video}" class="w-100 video${id}" controls></video><br></div>`);
+        $('#divUserScreen').append(`<div class="col-lg-4 video${id}"><video id="remoteStream${count_video}" class="w-100 video${id}" controls></video><br class="video${id}"></div>`);
         
 
         console.log(id);
