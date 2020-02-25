@@ -67,7 +67,14 @@ $('#ulUser').on('click', 'button', function () {
         //arrId.push(id);
         //arrStream.push('stream'+count_video);
         //arrRemoteStream.push('remoteStream'+count_video);
-        if (offer == 1) {
+
+        let remote = "remoteStream" + count_video;
+                openStream()
+                        .then(stream => {
+                                peer.call(id, stream).on('stream', remoteStream => playStream(remote, remoteStream));
+                        });
+
+        /*if (offer == 1) {
                 openStream()
                         .then(stream => {
                                 playStream('localStream', stream);
@@ -80,7 +87,7 @@ $('#ulUser').on('click', 'button', function () {
                         .then(stream => {
                                 peer.call(id, stream).on('stream', remoteStream => playStream(remote, remoteStream));
                         });
-        }
+        }*/
         offer = 2;
         count_video += 1;
 });
