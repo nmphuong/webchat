@@ -1,0 +1,62 @@
+*{
+    font-family: 'Poppins';
+}
+body{
+    /* background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, purple, purple, indigo, blue, green, yellow, orange, red, red, orange, yellow, green, blue, indigo, purple, purple, indigo, blue, green, yellow, orange, red); */
+}
+.scrollbar{
+    overflow-y: auto;
+    height: 75vh;
+}
+.scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+
+.scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
+}
+.screenUserRemote{
+    height: 100px!important;
+}
+.screenForVideo{
+    background-color: #000;
+}
+.divLocalStream video{
+    background: #000;
+    height: 100%;
+}
+.divLocalStream{
+    background-color: rgb(0, 0, 0);
+}
+#divUlUser>button {
+    outline: none;
+    border: none;
+    padding: 0.7em;
+    margin: 2px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    background: rgb(0, 0, 0);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#divRegister{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#divForUser button{
+    border:none;
+    background: none;
+}
